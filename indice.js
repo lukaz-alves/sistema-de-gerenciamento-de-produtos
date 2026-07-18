@@ -37,3 +37,14 @@ produtos.forEach(({id, nome, preco, estoque }) => {
     console.log(`Preço: R$${preco}`);
     console.log(`Estoque: ${estoque}\n`);
 });
+
+const produto = produtos.find(p => p.nome === "Monitor");
+
+if (produto) {
+  console.log("Produto encontrado!\n");
+  console.log(`Nome: ${produto.nome}`);
+  console.log(`Preço: ${produto.preco}`);
+  console.log(`Estoque: ${produto.estoque}`);
+} else {
+  console.log("Produto não encontrado.");
+}
