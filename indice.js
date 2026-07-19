@@ -41,10 +41,40 @@ produtos.forEach(({id, nome, preco, estoque }) => {
 const produto = produtos.find(p => p.nome === "Monitor");
 
 if (produto) {
-  console.log("Produto encontrado!\n");
-  console.log(`Nome: ${produto.nome}`);
-  console.log(`Preço: ${produto.preco}`);
-  console.log(`Estoque: ${produto.estoque}`);
+    console.log("Produto encontrado!");
+    console.log(`Nome: ${produto.nome}`);
+    console.log(`Preço: ${produto.preco}`);
+    console.log(`Estoque: ${produto.estoque}\n`);
 } else {
-  console.log("Produto não encontrado.");
+    console.log("Produto não encontrado.");
 }
+
+const valorTotal = produtos.reduce((acumulador, {preco, estoque}) => 
+        acumulador + (preco * estoque), 0);
+    console.log("Valor total do estoque:")
+    console.log(`R$ ${valorTotal}\n`);
+
+const produtoCaro = produtos.reduce((maisCaro, produto) => {
+    return produto.preco > maisCaro.preco ? produto : maisCaro;
+});
+
+console.log(produtoCaro.nome);
+console.log(`R$ ${produtoCaro.preco}\n`);
+
+const estoqueBaixo = produtos.filter(({estoque}) => estoque <= 5);
+    estoqueBaixo.forEach(({nome, estoque}) => {
+    console.log(`${nome} - Estoque: ${estoque}`);
+});
+
+console.log('');
+
+const aumentoDePreco = produtos.map(produto => {
+    if (produto.preco > 500) {
+        produto.preco = produto.preco + (produto.preco * 10 / 100);
+    }
+    return produto;
+});
+
+aumentoDePreco.forEach(({ nome, preco }) => {
+    console.log(`${nome} - Novo preço: R$ ${preco}`);
+});
